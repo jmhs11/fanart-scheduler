@@ -1,5 +1,7 @@
+import { UserNav } from '@/components/user-nav'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { cn } from '@/lib/utils'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -15,7 +17,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={cn("container", inter.className)}>
+        <div className="flex items-center justify-between py-4 space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight">Anilist Activity Scheduler</h2>
+          <div className="flex items-center space-x-2">
+            <UserNav loggedIn={false} />
+          </div>
+        </div>
+        {children}
+      </body>
     </html>
   )
 }
