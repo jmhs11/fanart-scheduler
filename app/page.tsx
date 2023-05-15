@@ -1,11 +1,20 @@
 
-import { UserAuthForm } from '@/components/login'
-import Image from 'next/image'
+import { ActivityForm } from '@/components/activity-form'
+import Link from 'next/link'
 
-export default function Home() {
+async function getTemplates(){
+  const res = await fetch('http://localhost:3001/templates')
+  const templates = await res.json()
+
+  return templates
+}
+
+export default async function Home() {
+  const templates = await getTemplates();
+
   return (
-    <main className="flex flex-col items-center justify-between">
-      <UserAuthForm />
-    </main>
+    <>
+      <ActivityForm templates={templates} />
+    </>
   )
 }

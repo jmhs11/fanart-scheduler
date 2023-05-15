@@ -1,19 +1,21 @@
+"use client"
+
 import { CreditCard, LogOut, PlusCircle, Settings, User } from "lucide-react"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useSession, signIn, signOut } from "next-auth/react";
 
-export function UserNav({loggedIn = false}) {
+export function UserNav({ loggedIn = false, userData }: { loggedIn: boolean, userData?: any }) {
   return (
-    <Button variant="ghost" className="relative rounded-full">
+    <Button variant="ghost" className={`rounded-full h-14 ${loggedIn ? 'aspect-square p-2' : ''}`} onClick={() => signIn("AniListProvider")}>
       {loggedIn ? (
-        <Avatar className="h-9 w-9">
-          <AvatarImage src="/avatars/03.png" alt="@shadcn" />
-          <AvatarFallback>SC</AvatarFallback>
-        </Avatar>) : (
-        <Link className="" href='https://anilist.co/api/v2/oauth/authorize?client_id=12621&response_type=token'>Login with AniList</Link>
-      )}
+        <Avatar className="h-14 w-14">
+          <AvatarImage src={userData?.picture.large} alt={`${userData?.name} profile image`} />
+        </Avatar>) :
+        "Login with AniList"
+      }
     </Button>
   )
 }
