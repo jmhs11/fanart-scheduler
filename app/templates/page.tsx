@@ -1,35 +1,43 @@
 import { CreateTemplateButton } from "@/components/create-template-button";
-import { Template, columns } from "./columns";
+import { prismaClient } from "@/lib/prismaClient";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { getServerSession } from "next-auth";
+import { columns } from "./columns";
 import { DataTable } from "./data-table";
+import Link from "next/link";
 
 export const metadata = {
-  title: 'Templates',
-}
+  title: "Templates",
+};
 
-async function getData(): Promise<Template[]> {
-  // const res = fetch("http://localhost:3000/api/templates")
-  return [
-    {
-      "id": "1",
-      "name": "Fanart of the day",
-      "description": "Fanart with image and link to the anime",
-      "value": "~~~╔══════ ≪ •❈• ≫ ══════╗~~~\n# ~~~__  FANART OF THE DAY__~~~\n~~~╚══════ ≪ •❈• ≫ ══════╝~~~\n~~~ img350(%fanart%)  ~~~\n\n~~~%serie% ~~~\n ~~~ [%artist%](%fanartLink%) ~~~"
-    }
+async function getTemplates(userId?: number) {
+  let user = await prismaClient.user.findFirst({
+    where: {
+      id: userId,
+    },
+    include: {
+      templates: true,
+    },
+  });
 
-  ]
+  return user?.templates;
 }
 
 export default async function Templates() {
-  const data = await getData()
+  const session = await getServerSession(authOptions);
+  const data = await getTemplates(session?.user.id);
 
-  return <div className="container">
-    <div className="flex items-center space-x-2">
-      <h1 className="text-2xl flex">Templates</h1>
-      <CreateTemplateButton />
+  return (
+    <div className="">
+      <div className="flex items-center space-x-2">
+        <h1 className="text-2xl flex">Templates</h1>
+        <Link href="/templates/new">
+          <CreateTemplateButton />
+        </Link>
+      </div>
+      <div className="pt-4">
+        <DataTable columns={columns} data={data || []} />
+      </div>
     </div>
-    <div className="pt-4">
-
-      <DataTable columns={columns} data={data} />
-    </div>
-  </div>
+  );
 }

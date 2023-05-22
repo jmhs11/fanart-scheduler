@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model User {
+  id        Int        @id
+  name      String     @db.TinyText
+  templates Template[]
+  UserImage UserImage?
+}
+
+model Template {
+  id          String @id @default(uuid())
+  name        String @db.TinyText
+  description String @db.TinyText
+  value       String @db.Text
+  userId      Int
+  user        User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Activity {
+  id     String @id @default(uuid())
+  cronId String @unique
+  token  String @db.Text
+  value  String @db.Text
+}
+
+model UserImage {
+  medium String @db.Text
+  large  String @db.Text
+  userId Int    @id @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+model Timezone {
+  id    Int    @id @default(autoincrement())
+  name  String @db.TinyText
+  value String @db.TinyText
+}

@@ -1,18 +1,12 @@
 "use client"
 
 import { Button } from "@/components/ui/button";
+import { Template } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table"
 import { Edit2, Trash2 } from "lucide-react";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Template = {
-  id: string;
-  name: string;
-  description: string;
-  value: string;
-}
-
 export const columns: ColumnDef<Template>[] = [
   {
     accessorKey: "name",
@@ -55,6 +49,7 @@ export const columns: ColumnDef<Template>[] = [
 
 export const templates: Template[] = [
   {
+    userId: 1,
     id: "1",
     name: "Fanart of the day",
     description: "Fanart with image and link to the anime",
