@@ -2,6 +2,7 @@ import { ActivityForm } from "@/components/activity-form";
 import { prismaClient } from "@/lib/prismaClient";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
+import { log } from "next-axiom";
 
 async function getTemplates(userId: number) {
   let user = await prismaClient.user.findFirst({
@@ -22,8 +23,9 @@ async function getTimezones() {
 
 export default async function Home() {
   const session = await getServerSession(authOptions);
-
+  
   if (!session) return null;
+  log.debug('User logged in', { user: session.user });
 
   const templates = await getTemplates(session?.user?.id);
   const timezones = await getTimezones();
