@@ -3,7 +3,7 @@ lockfileVersion: '6.0'
 dependencies:
   '@apollo/client':
     specifier: 3.7.14
-    version: 3.7.14(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+    version: 3.7.14(react-dom@18.2.0)(react@18.2.0)
   '@prisma/client':
     specifier: 4.14.1
     version: 4.14.1(prisma@4.14.1)
@@ -76,6 +76,9 @@ dependencies:
   next-auth:
     specifier: 4.22.1
     version: 4.22.1(next@13.4.2)(react-dom@18.2.0)(react@18.2.0)
+  next-axiom:
+    specifier: ^0.17.0
+    version: 0.17.0(next@13.4.2)
   postcss:
     specifier: 8.4.23
     version: 8.4.23
@@ -119,7 +122,7 @@ packages:
     engines: {node: '>=10'}
     dev: false
 
-  /@apollo/client@3.7.14(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0):
+  /@apollo/client@3.7.14(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-BRvdkwq5PAXBkjXjboO12uksDm3nrZEqDi4xF97Fk3Mnaa0zDOEfJa7hoKTY9b9KA1EkeWv9BL3i7hSd4SfGBg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -137,12 +140,11 @@ packages:
       subscriptions-transport-ws:
         optional: true
     dependencies:
-      '@graphql-typed-document-node/core': 3.2.0(graphql@16.6.0)
+      '@graphql-typed-document-node/core': 3.2.0
       '@wry/context': 0.7.2
       '@wry/equality': 0.5.5
       '@wry/trie': 0.3.2
-      graphql: 16.6.0
-      graphql-tag: 2.12.6(graphql@16.6.0)
+      graphql-tag: 2.12.6
       hoist-non-react-statics: 3.3.2
       optimism: 0.16.2
       prop-types: 15.8.1
@@ -223,12 +225,10 @@ packages:
       - '@types/react'
     dev: false
 
-  /@graphql-typed-document-node/core@3.2.0(graphql@16.6.0):
+  /@graphql-typed-document-node/core@3.2.0:
     resolution: {integrity: sha512-mB9oAsNCm9aM3/SOv4YtBMqZbYj10R7dkq8byBqxGY/ncFwhf2oQzMV+LCRlWoDSEBJ3COiR1yeDvMtsoOsuFQ==}
     peerDependencies:
       graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
-    dependencies:
-      graphql: 16.6.0
     dev: false
 
   /@humanwhocodes/config-array@0.11.8:
@@ -2299,19 +2299,13 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: false
 
-  /graphql-tag@2.12.6(graphql@16.6.0):
+  /graphql-tag@2.12.6:
     resolution: {integrity: sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==}
     engines: {node: '>=10'}
     peerDependencies:
       graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0 || ^16.0.0
     dependencies:
-      graphql: 16.6.0
       tslib: 2.5.0
-    dev: false
-
-  /graphql@16.6.0:
-    resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
-    engines: {node: ^12.22.0 || ^14.16.0 || ^16.0.0 || >=17.0.0}
     dev: false
 
   /has-bigints@1.0.2:
@@ -3219,6 +3213,16 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       uuid: 8.3.2
+    dev: false
+
+  /next-axiom@0.17.0(next@13.4.2):
+    resolution: {integrity: sha512-qFdnH50SvRjJUAmNjGIYLcRc4tO/U4R1h9WUuniiwaucXAH5KhL06m7TT3WWD2U1HbulwSfC0R+NlPASOx1XlQ==}
+    engines: {node: '>=15'}
+    peerDependencies:
+      next: ^12.1.4 || ^13
+    dependencies:
+      next: 13.4.2(react-dom@18.2.0)(react@18.2.0)
+      whatwg-fetch: 3.6.2
     dev: false
 
   /next@13.4.2(react-dom@18.2.0)(react@18.2.0):
@@ -4402,6 +4406,10 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
+    dev: false
+
+  /whatwg-fetch@3.6.2:
+    resolution: {integrity: sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==}
     dev: false
 
   /which-boxed-primitive@1.0.2:
