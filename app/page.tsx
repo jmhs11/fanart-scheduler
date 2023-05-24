@@ -3,8 +3,6 @@ import { prismaClient } from "@/lib/prismaClient";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 
-export { reportWebVitals } from 'next-axiom';
-
 async function getTemplates(userId: number) {
   let user = await prismaClient.user.findFirst({
     where: {
